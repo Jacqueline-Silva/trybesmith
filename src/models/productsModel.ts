@@ -8,6 +8,13 @@ export default class ProductsModel {
     this.connection = connection;
   }
 
+  public async getAllProducts():Promise<IProduct[]> {
+    const query = `
+      SELECT * FROM Trybesmith.Products;`;
+    const [result] = await this.connection.execute(query);
+    return result as IProduct[];
+  }
+
   public async createProducts(name: string, amount: string): Promise<IProduct> {
     const query = `
       INSERT INTO Trybesmith.Products (name, amount) VALUES (?, ?);`;
